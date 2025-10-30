@@ -1,4 +1,5 @@
-name: Python Test Workflow
+name: CI/CD Dummy Deployment
+
 on:
   push:
     branches: [ main ]
@@ -6,11 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build_and_test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -23,8 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Run tests with Pytest
+      - name: Run Pytest
         run: pytest -v
+
   deploy:
     needs: build_and_test
     runs-on: ubuntu-latest
